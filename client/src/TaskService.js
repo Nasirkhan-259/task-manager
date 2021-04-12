@@ -23,14 +23,14 @@ class TaskService {
     });
   }
   //Create post
-  static insertPost(text) {
+  static insertTask(title) {
     return axios.post(url, {
-      text,
+      title,
     });
   }
 
   //delete post
-  static deletePost(id) {
+  static deleteTask(id) {
     return axios.delete(`${url}${id}`);
   }
 }

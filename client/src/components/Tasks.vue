@@ -1,14 +1,13 @@
 <template>
   <div class="container">
     <h1 class="heading">To do App</h1>
-    <label class="label">To DO</label>
     <div class="input-container">
-      <input type="text" name="text" v-model="text" class="input-type-text-field" placeholder="What needs to be done?">
-      <button class="add_button">Add</button>
+      <input type="text" name="text" v-model="text" class="input-type-text-field" placeholder="What needs to be done?"  v-on:keyup.enter="createTask()">
+      <button class="add_button" v-on:click="createTask()">Add</button>
     </div>
     
     
-    <div class="error" :v-if="error">{{error}}</div>
+    <div :v-if="error !=''"><p class="error">{{error}}</p></div>
     <div class="posts-container">
       <div class="post"
       v-for="(post , index) in posts"
@@ -16,6 +15,8 @@
       
       >
         <p class="text">{{post.title}}</p>
+        <button class="remove_button" v-on:click="deleteTask(post._id)">Remove</button>
+        
       </div>
     </div>
   </div>
@@ -38,6 +39,20 @@ export default {
       this.posts = await TaskService.getTasks();
     } catch (error) {
       this.error = error.message;
+    }
+  },
+  methods : {
+    async createTask(){
+      if(this.text==''){
+        return this.error = 'Input field cannot be empty!'
+      }
+      await TaskService.insertTask(this.text);
+      this.posts = await TaskService.getTasks();
+      this.text = '';
+    },
+    async deleteTask(id){
+      await TaskService.deleteTask(id);
+      this.posts = await TaskService.getTasks();
     }
   }
 }
@@ -63,7 +78,8 @@ button.add_button {
     border-bottom-right-radius: 5px;
 padding: 9px 9px 9px 12px;
 }
-p.error {
+
+.error {
   border-bottom: 1px solid #ff5b5f;
   background-color: #ffc5c1;
   padding:  10px;
