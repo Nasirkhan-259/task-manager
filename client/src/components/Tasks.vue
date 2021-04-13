@@ -80,8 +80,6 @@ padding: 9px 9px 9px 12px;
 }
 
 .error {
-  border-bottom: 1px solid #ff5b5f;
-  background-color: #ffc5c1;
   padding:  10px;
   margin-bottom: 15px;
 }
