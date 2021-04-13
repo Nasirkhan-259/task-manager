@@ -2,11 +2,11 @@
 
 > Example of a fullstack app using Vue.js, Express and MongoDB. You will need to edit the MongoDB connection string in server/routes/api/posts.js to your own.
 ## Technologies Used 
-#MongoDB
-#Node js
-#Vue Js
-#AWS EC2 Instance
-#PM2
+>MongoDB
+>Node js
+>Vue Js
+>AWS EC2 Instance
+>PM2
 ## Quick Start
 
 ```bash
